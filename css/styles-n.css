@@ -1,0 +1,365 @@
+/*--------------------------------------------------------- 
+# SECTION : Variables de couleurs
+---------------------------------------------------------*/
+:root {
+    /* Palette de couleurs rose */
+    --rose-pale: #FDB9BA;          /* Rose pâle doux */
+    --rose-mauve: #AF6B82;         /* Rose tirant sur le mauve */
+    --rose-tres-pale: #FBE6EF;     /* Rose très pâle, presque blanc */
+    --rose-vif: #FA309E;           /* Rose vif */
+    --rose-fonce: #F4037C;         /* Rose foncé */
+    --rose-blanc: #FDF1F3;         /* Rose presque blanc */
+    
+    /* Variables fonctionnelles */
+    --couleur-fond-principale: var(--rose-pale);
+    --couleur-texte-principale: #333;
+    --couleur-accent: var(--rose-fonce);
+    --couleur-lien: var(--rose-vif);
+    --couleur-lien-hover: var(--rose-mauve);
+    --couleur-fond-section: var(--rose-tres-pale);
+    --couleur-fond-footer: var(--rose-pale);
+    --couleur-titre: var(--rose-fonce);
+}
+
+/*--------------------------------------------------------- 
+# SECTION : Styles généraux 
+---------------------------------------------------------*/
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Arial', sans-serif;
+    background-color: var(--couleur-fond-principale); /* Utilisation de la variable */
+    color: var(--couleur-texte-principale);
+    line-height: 1.6;
+}
+
+/* Conteneur en flex permettant d'aligner le contenu sur une ligne (row) et donc l'espace restant sera divisé entre chaque élément enfant du .container */
+.container {
+    display: flex;
+    justify-content: space-between;
+    padding: 0 15px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* Titre principal de la page avec une transition d'agrandissement d'échelle au survol */
+h1 {
+    font-size: 1.3rem;
+    transition: transform 0.3s ease;
+    color: var(--couleur-titre); /* Utilisation de la variable */
+    text-align: center;
+}
+
+h1:hover {
+    transform: scale(1.1);
+}
+
+h2 {
+    font-size: 1.8rem;
+    color: var(--couleur-titre);
+    text-align: center;
+    margin-top: 2rem;
+    font-family: 'Pacifico', cursive;
+}
+
+h3 {
+    font-size: 1.2rem;
+    color: var(--couleur-texte-principale);
+    margin-bottom: 1rem;
+}
+
+p {
+    margin-bottom: 1.5rem;
+    font-size: 0.95rem;
+}
+
+a {
+    color: var(--couleur-lien);
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+a:hover {
+    color: var(--couleur-lien-hover);
+}
+
+ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.featured-image {
+    max-width: 100%;
+    height: auto;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/*---------------------------------------------------------- 
+# SECTION : En-tête (nav, log etc) 
+----------------------------------------------------------*/
+header {
+    background-color: var(--couleur-fond-principale);
+    padding: 1rem 0;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 1rem;
+}
+
+/* Configuration du conteneur de logo et du menu vertical de cupcakes */
+.logo-container {
+    display: flex;
+    align-items: flex-start;
+    position: relative;
+}
+
+.primary-logo {
+    height: 50px;
+    cursor: pointer;
+    z-index: 10;
+}
+
+/* Menu vertical qui apparaît au survol */
+.nav-menu {
+    position: fixed;
+    left: 20px;
+    top: 120px;
+    width: 120px;
+    background-color: #FFFFFF;
+    border-radius: 15px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    padding: 15px 10px;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.4s ease, visibility 0.4s ease;
+    z-index: 1000;
+}
+
+/* Au survol du logo, le menu apparaît */
+.logo-container:hover + .nav-menu,
+.nav-menu:hover {
+    opacity: 1;
+    visibility: visible;
+}
+
+/* Style pour la liste de navigation verticale */
+.nav-menu ul {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    align-items: center;
+    text-align: center;
+}
+
+/* Style pour chaque élément de menu */
+.nav-item {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* Ajout des images de cupcakes avant chaque lien */
+.nav-item::before {
+    content: '';
+    display: block;
+    width: 40px;
+    height: 40px;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    margin-bottom: 5px;
+}
+
+/* Attribution des différentes images de cupcakes */
+.nav-item:nth-child(1)::before {
+    background-image: url('../assets/images/cup_fraise.png');
+}
+
+.nav-item:nth-child(2)::before {
+    background-image: url('../assets/images/cup_royal.png');
+}
+
+.nav-item:nth-child(3)::before {
+    background-image: url('../assets/images/cup_fraise.png');
+}
+
+.nav-item:nth-child(4)::before {
+    background-image: url('../assets/images/cup_royal.png');
+}
+
+/* Style des liens dans le menu vertical */
+.nav-link {
+    color: var(--couleur-lien);
+    font-weight: 600;
+    font-size: 14px;
+    text-align: center;
+    transition: all 0.3s ease;
+    display: block;
+    width: 100%;
+}
+
+.nav-link:hover {
+    transform: scale(1.1);
+    color: var(--couleur-lien-hover);
+}
+
+/* Style pour les icônes à droite */
+.nav-icons {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.search-icon {
+    height: 24px;
+    cursor: pointer;
+}
+
+/*---------------------------------------------------------- 
+# SECTION : Héros et présentation
+----------------------------------------------------------*/
+.presentation {
+    padding: 2rem 1rem;
+    text-align: center;
+    max-width: 800px;
+    margin: 0 auto;
+    background-color: var(--rose-blanc);
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+}
+
+.presentation h2 {
+    color: var(--couleur-titre);
+    font-family: 'Pacifico', cursive;
+    margin-bottom: 1.5rem;
+}
+
+.presentation p {
+    text-align: justify;
+    line-height: 1.8;
+}
+
+.cupcake {
+    padding: 2rem 0;
+    background-color: var(--rose-tres-pale);
+}
+
+.cupcake-item {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    flex-wrap: wrap;
+    margin-bottom: 2rem;
+}
+
+/*---------------------------------------------------------- 
+# SECTION : Footer
+----------------------------------------------------------*/
+.footer {
+    background-color: var(--couleur-fond-footer);
+    padding: 3rem 1rem 1rem;
+    color: var(--couleur-texte-principale);
+}
+
+.footer-section {
+    margin-bottom: 2rem;
+    text-align: center;
+}
+
+.hours-list {
+    margin-bottom: 1.5rem;
+}
+
+.hours-list li {
+    margin-bottom: 0.5rem;
+}
+
+.closed {
+    color: var(--couleur-accent);
+    font-weight: bold;
+}
+
+.contact-button {
+    display: inline-block;
+    background-color: var(--couleur-accent);
+    color: white;
+    padding: 0.5rem 1.5rem;
+    border-radius: 25px;
+    margin-top: 1rem;
+    transition: background-color 0.3s ease;
+}
+
+.contact-button:hover {
+    background-color: var(--couleur-lien-hover);
+}
+
+.footer-logo {
+    height: 60px;
+    margin-top: 1rem;
+}
+
+.phone-number {
+    font-size: 1.1rem;
+    font-weight: bold;
+}
+
+.locate-link {
+    text-decoration: underline;
+}
+
+.copyright {
+    text-align: center;
+    padding-top: 2rem;
+    font-size: 0.8rem;
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
+    margin-top: 2rem;
+}
+
+/*---------------------------------------------------------------- 
+# ADAPTATION PAR MEDIA QUERIES (Responsiveness) pour grands écrans 
+Car ce qui précède les media queries est stylisé pour mobile en premier (mobile first).
+----------------------------------------------------------------*/
+
+/* Styles d'exception pour les écrans d'une largeur de minimum 778px et plus */
+@media screen and (min-width: 778px) {
+    /* Adapter la taille fixe du titre principal qui était de 1.3rem et le changer pour 4vw qui équivaut à 4% de la largeur du viewport (de la fenêtre) . */
+    h1 {
+        font-size: 4vw;
+    }
+
+    .presentation {
+        padding: 3rem 2rem;
+    }
+
+    .presentation p {
+        font-size: 1.1rem;
+    }
+
+    .footer {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-around;
+    }
+
+    .footer-section {
+        flex-basis: 30%;
+    }
+
+    .copyright {
+        flex-basis: 100%;
+    }
+
+    .cupcake-item img {
+        max-width: 45%;
+    }
+}
